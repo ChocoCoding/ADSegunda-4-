@@ -1,10 +1,7 @@
 package org.example.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +12,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = {"listaAutores"})
 public class Libros {
 
     @Column(name = "id_libro")

@@ -24,7 +24,7 @@ public class AutorRepository implements Repository<Autores> {
 
     @Override
     public List<Autores> findAll() {
-        Query query = (Query) session.createQuery("SELECT a from Autores").getResultList();
+        Query query = (Query) session.createQuery("SELECT a from Autores a").getResultList();
         return (List<Autores>) query;
     }
 
@@ -51,4 +51,7 @@ public class AutorRepository implements Repository<Autores> {
         session.update(autor);
         trx.commit();
     }
+
+
+
 }

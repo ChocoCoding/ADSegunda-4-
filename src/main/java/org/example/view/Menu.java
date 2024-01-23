@@ -58,7 +58,7 @@ public class Menu {
             System.out.println("\n********************** Bienvenido a la biblioteca ************************");
             System.out.println("\n\t1. Insertar autor.\t\t\t\t\t3. Insertar telefono.");
             System.out.println("\n\t2. Insertar libro.\t\t\t\t\t4. Enlazar autor y libro.");
-            System.out.println("\n\t0. SALIR");
+            System.out.println("\n0.SALIR");
             System.out.println("\n**************************************************************************");
 
             System.out.println("Introduce una opcion: ");
@@ -85,13 +85,25 @@ public class Menu {
                     String DNI = pedirString("Introduzca el DNI del autor");
                     String numTel = pedirString("Introduzca el número de telefono");
 
-                    Telefonos telefono = new Telefonos(numTel);
+                    Telefonos telefono = new Telefonos(numTel,DNI);
                     Autores autor1 = autorRepository.findById(DNI);
 
                     autor1.setTelefono(telefono);
                     autorRepository.update(autor1);
                     telefonoRepository.create(telefono);
                     break;
+                case 4:
+                    String DNI2 = pedirString("Introduzca el DNI del autor");
+                    String titulo2 = pedirString("Introduce el titulo del libro");
+
+                    Autores autor2 = autorRepository.findById(DNI2);
+                    Libros libro2 = librosRepository.findByTitulo(titulo2);
+
+                    autor2.addListaLibros(libro2);
+
+                    librosRepository.update(libro2);
+                    break;
+
             }
         }while (opt != 0);
     }
@@ -110,7 +122,15 @@ public class Menu {
 
             switch (opt){
                 case 1:
-
+                    String dni = pedirString("Introduce el DNI del autor para borrar: ");
+                    Autores autor = autorRepository.findById(dni);
+                    autorRepository.delete(autor);
+                    break;
+                case 2:
+                    String id = pedirString("Introduce el ID del libro a borrar: ");
+                    Libros libro = librosRepository.findById(id);
+                    librosRepository.delete(libro);
+                    break;
             }
         }while (opt != 0);
     }
@@ -121,7 +141,7 @@ public class Menu {
         do {
             System.out.println("\n********************** Bienvenido a la biblioteca ************************");
             System.out.println("\n\t1. Ver Libro.\t\t\t\t\t\t3. Ver todos los libros.");
-            System.out.println("\n\t2. Ver Libro de un autor.\t\t\t4. Ver todos los autores con sus libros.");
+            System.out.println("\n\t2. Ver Libros de un autor.\t\t\t4. Ver todos los autores con sus libros.");
             System.out.println("\n\t0. SALIR.");
             System.out.println("\n**************************************************************************");
 
@@ -130,6 +150,25 @@ public class Menu {
 
             switch (opt){
                 case 1:
+                    String titulo = pedirString("Introduce el titulo del libro que quieres ver: ");
+                    Libros libro = librosRepository.findByTitulo(titulo);
+
+                    System.out.println(libro.getId());
+                    System.out.println(libro.getTitulo());
+                    System.out.println(libro.getPrecio());
+
+                    for (Autores a: libro.getListaAutores()) {
+                        System.out.println("Info Autor: ");
+                        System.out.println(a.getDni());
+                        System.out.println(a.getNombre());
+                        System.out.println(a.getNacionalidad());
+                        System.out.println(a.getTelefono());
+                    }
+
+                case 2:
+                    String dni = pedirString("Introduce el DNI del autor para buscar sus libros: ");
+                    Autores autor = autorRepository.findById(dni);
+
 
             }
         }while (opt != 0);

@@ -24,21 +24,25 @@ public class TelefonoRepository implements Repository<Telefonos> {
 
     @Override
     public List<Telefonos> findAll() {
-        return null;
+        return (List<Telefonos>) session.createQuery("SELECT t FROM Telefonos t");
     }
 
     @Override
     public Telefonos findById(String id) {
-        return null;
+        return (Telefonos) this.session.createQuery("SELECT t FROM Telefonos t WHERE id = :id").setParameter("id",id);
     }
 
     @Override
     public void delete(Telefonos telefono) {
-
+        Transaction trn = this.session.beginTransaction();
+        this.session.delete(telefono);
+        trn.commit();
     }
 
     @Override
     public void update(Telefonos telefono) {
-
+        Transaction trn = this.session.beginTransaction();
+        this.session.update(telefono);
+        trn.commit();
     }
 }

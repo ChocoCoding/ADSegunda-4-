@@ -11,6 +11,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = {"listaLibros"})
 
 public class Autores {
 
@@ -40,6 +42,15 @@ public class Autores {
     public void addListaLibros(Libros libro){
         this.listaLibros.add(libro);
         libro.addAutor(this);
+    }
+
+    public void setTelefono(Telefonos telefono) {
+        this.telefono = telefono;
+        telefono.setAutor(this);
+    }
+    public void mostrarLibros(){
+
+
     }
 
 }

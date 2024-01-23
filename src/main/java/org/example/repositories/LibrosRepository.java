@@ -4,6 +4,7 @@ import org.example.models.Libros;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.management.Query;
 import java.util.List;
 
 public class LibrosRepository implements Repository<Libros>{
@@ -23,24 +24,33 @@ public class LibrosRepository implements Repository<Libros>{
 
     @Override
     public List<Libros> findAll() {
-        return null;
+        Transaction trn = session.beginTransaction();
+        return (List<Libros>) session.createQuery("SELECT l FROM Libros l").getResultList();
     }
 
     @Override
     public Libros findById(String id) {
-        return null;
+
+        Libros libro = (Libros) session.createQuery("SELECT l FROM Libros l WHERE l.id = :id").setParameter("id",id).getSingleResult();
+        return libro;
+    }
+
+    public Libros findByTitulo(String titulo){
+        return (Libros) session.createQuery("SELECT l FROM Libros l WHERE l.titulo = :titulo").setParameter("titulo",titulo).getSingleResult();
     }
 
     @Override
     public void delete(Libros libro) {
-        Transaction trx = session.beginTransaction();
+        Transaction trn = session.beginTransaction();
         session.delete(libro);
-        trx.commit();
+        trn.commit();
     }
 
     @Override
     public void update(Libros libro) {
-
+        Transaction trn = session.beginTransaction();
+        session.update(libro);
+        trn.commit();
     }
 
 

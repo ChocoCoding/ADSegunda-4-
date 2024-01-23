@@ -2,10 +2,7 @@ package org.example.models;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -14,6 +11,8 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor
+
 public class Telefonos implements Serializable {
 
     @Id
@@ -23,6 +22,10 @@ public class Telefonos implements Serializable {
     @NonNull
     @Column(name = "numero_telefono")
     private String numeroTlf;
+
+    @NonNull
+    @Column(name = "dni")
+    private String dni;
 
 }
 
