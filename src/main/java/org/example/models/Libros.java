@@ -29,7 +29,7 @@ public class Libros {
     @Column(name = "precio")
     private double precio;
 
-    @ManyToMany(mappedBy = "listaLibros")
+    @ManyToMany(mappedBy = "listaLibros", cascade = CascadeType.ALL)
     private List<Autores> listaAutores = new ArrayList<Autores>();
 
     public void addAutor(Autores autor){

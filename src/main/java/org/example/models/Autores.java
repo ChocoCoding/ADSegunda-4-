@@ -30,13 +30,13 @@ public class Autores {
     @NonNull
     private String nacionalidad;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "libros_autores",
             joinColumns = @JoinColumn(name = "dni_autor"),
             inverseJoinColumns = @JoinColumn(name = "id_libro"))
     List<Libros> listaLibros = new ArrayList<Libros>();
 
-    @OneToOne(mappedBy = "autor")
+    @OneToOne(mappedBy = "autor",cascade = CascadeType.ALL)
     @JoinColumn(name = "dni_autor")
     private Telefonos telefono;
 

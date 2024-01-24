@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class Telefonos implements Serializable {
 
     @Id
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     private Autores autor;
 
     @NonNull
