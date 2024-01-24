@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Table(name = "libros")
+@Table(name = "libros",uniqueConstraints = @UniqueConstraint(columnNames = "titulo", name = "tituloUniqueConstraint"))
 @Entity
 @Data
 @AllArgsConstructor
@@ -34,5 +34,14 @@ public class Libros {
 
     public void addAutor(Autores autor){
         this.listaAutores.add(autor);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Libros{");
+        sb.append("id=").append(id);
+        sb.append("titulo='").append(titulo).append('\'');
+        sb.append("precio=").append(precio);
+        return sb.toString();
     }
 }

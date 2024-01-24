@@ -24,8 +24,10 @@ public class AutorRepository implements Repository<Autores> {
 
     @Override
     public List<Autores> findAll() {
-        Query query = (Query) session.createQuery("SELECT a from Autores a").getResultList();
-        return (List<Autores>) query;
+        Transaction trx = session.beginTransaction();
+        List<Autores> autores = session.createQuery("SELECT a from Autores a").getResultList();
+        trx.commit();
+        return autores;
     }
 
     @Override

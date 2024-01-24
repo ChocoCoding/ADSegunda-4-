@@ -9,6 +9,7 @@ import org.example.repositories.TelefonoRepository;
 import org.example.utilities.HibernateUtil;
 import org.hibernate.Session;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -164,12 +165,24 @@ public class Menu {
                         System.out.println(a.getNacionalidad());
                         System.out.println(a.getTelefono());
                     }
+                    break;
 
                 case 2:
                     String dni = pedirString("Introduce el DNI del autor para buscar sus libros: ");
                     Autores autor = autorRepository.findById(dni);
-
-
+                    autor.mostrarLibrosAutor();
+                    break;
+                case 3:
+                    List<Libros> libros = librosRepository.findAll();
+                    for (Libros l: libros) {
+                        System.out.println(l);
+                    }
+                case 4:
+                    List<Autores> autores = autorRepository.findAll();
+                    for (Autores a : autores) {
+                        System.out.println("Autor: " + a.getNombre());
+                        a.mostrarLibrosAutor();
+                    }
             }
         }while (opt != 0);
     }

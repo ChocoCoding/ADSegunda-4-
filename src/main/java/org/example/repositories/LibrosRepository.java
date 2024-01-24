@@ -25,7 +25,10 @@ public class LibrosRepository implements Repository<Libros>{
     @Override
     public List<Libros> findAll() {
         Transaction trn = session.beginTransaction();
-        return (List<Libros>) session.createQuery("SELECT l FROM Libros l").getResultList();
+        List<Libros> libros = session.createQuery("SELECT l FROM Libros l").getResultList();
+        trn.commit();
+        return libros;
+
     }
 
     @Override
